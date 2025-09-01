@@ -21,21 +21,24 @@ import { v4 as uuidv4 } from 'uuid';
 import { StaticImageData } from 'next/image';
 import Iternary from './Iternary';
 
+import { HolidayInfo } from "@/types/trip";
+
 export type message={
     role:string,
     content:string,
     ui?:string
 }
 
-export type HolidayInfo={
-    budget:String,
-    destination:String,
-    duration:String,
-    origin:String,
-    group_size:String
-    hotels:Hotel[],
-    itinerary:DayPlan[];
-}
+// export type HolidayInfo={
+//     budget:string;
+//     destination:string;
+//     duration:string;
+//     origin:string;
+//     group_size:string;
+//     hotels:Hotel[];
+//     itinerary:ItineraryDay[];
+//     activities: place[]; 
+// }
 
 export type Hotel={
   hotel_name:string;
@@ -66,7 +69,7 @@ export type place = {
   best_time_to_visit: string; // e.g., "October to March" or "Morning hours"
 };
 
-export type DayPlan = {
+export type ItineraryDay = {
   places: any;
   day_number: number; // e.g., 1, 2, 3...
   hotel: Hotel; // where the user stays that day

@@ -5,6 +5,9 @@ import Provider from "./provider";
 import { ClerkProvider } from "@clerk/nextjs";
 import { ConvexClientProvider } from "./ConvexClientProvider";
 import { Toaster } from "sonner"; 
+import TripDetailProvider from "@/context/TripDetailContext";
+
+ // Adjust the path
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -31,8 +34,11 @@ export default function RootLayout({
           {/* <Provider>
            
           </Provider> */}
-          {children}
+           <TripDetailProvider>
+              {children}
            <Toaster richColors position="top-right" />
+             </TripDetailProvider>
+        
         </ConvexClientProvider>
         
       </body>

@@ -70,7 +70,8 @@ import { api } from "@/convex/_generated/api";
 import { useUserDetails } from '../provider';
 import { ArrowBigLeftIcon, ArrowBigRightIcon, Link, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { HolidayInfo } from "../Create-new-trip/_components/ChatBox";
+// import { HolidayInfo } from "../Create-new-trip/_components/ChatBox";
+import { HolidayInfo } from "@/types/trip";
 import Image from "next/image";
 import Hotelimagei from "../../public/HotelImage1.jpg"
 import MyTripCarditem from "./_components/MyTripCarditem";

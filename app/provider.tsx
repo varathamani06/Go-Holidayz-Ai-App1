@@ -7,7 +7,8 @@ import { api } from '@/convex/_generated/api';
 import { useUser } from '@clerk/nextjs';
 import { UserDetailsContext } from '@/context/UserDetailsContext';
 import { type TripContextType, TripDetailContext } from '@/context/TripDetailContext';
-import { HolidayInfo } from './Create-new-trip/_components/ChatBox';
+// import { HolidayInfo } from './Create-new-trip/_components/ChatBox';
+import { HolidayInfo } from "@/types/trip";
 import Footer from './_components/Footer';
 
 
