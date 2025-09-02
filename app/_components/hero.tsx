@@ -4,13 +4,22 @@ import { Button } from '@/components/ui/button'
 import { Textarea } from '@/components/ui/textarea'
 import { ArrowDown, Globe2, Landmark, Plane, Send } from 'lucide-react'
 
-import React from 'react'
+import React,{ useState, useEffect } from 'react'
 import HeroVideoDialog from "@/components/magicui/hero-video-dialog";
 import { useUser } from '@clerk/nextjs';
 
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
+import Image, { StaticImageData } from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+
+import HeroImage from "../../public/HeroImage.jpeg";
+import ImageItem1 from "../../public/ImageItem1.jpeg";
+import ImageItem2 from "../../public/ImageItem2.jpeg";
+import ImageItem3 from "../../public/ImageItem3.jpeg";
+import Hotel2 from "../../public/Hotel2.jpg";
 
 const Suggestion = [
     {
@@ -32,6 +41,10 @@ const Suggestion = [
 ];
 
 
+
+
+
+
 function hero() {
 
     const {user}=useUser();
@@ -44,12 +57,26 @@ function hero() {
         router.push("/Create-new-trip");
     }
 
+    const [currentIndex, setCurrentIndex] = useState(0);
+
+     // ⏳ Auto change background every 5s
+
+
   return (
 
     <div className='mt-24 md:mt-24 sm:px-6 w-full flex justify-center '>
 
+       
+
+
+
         <div className='max-w-3xl w-full text-center space-y-6'>
-           <h1 className='text-xl md:text-5xl font-bold text-gray-800'>
+             
+             {/* Framo motion */}
+          
+
+            
+           <h1 className='text-xl md:text-5xl font-bold text-gray-800 mt-3'>
             hey, i'm your personal <span className='text-primary'>Holiday Buddy😎🙌</span>
            </h1>
            <p className='text-lg'>Tell me what you need ✈️🏨 Trips? Hotels? 🗺️ Just say the word — I’ll handle it 🤖✨</p>

@@ -23,6 +23,8 @@ import Iternary from './Iternary';
 
 import { HolidayInfo } from "@/types/trip";
 
+import { toast } from 'sonner'
+
 export type message={
     role:string,
     content:string,
@@ -151,7 +153,7 @@ function ChatBox() {
          setMessages((prev) => [
              ...prev,
              newMessage,
-             { role: 'assistant', content: '⏳ Holiday Buddy is typing...' }
+             { role: 'assistant', content: '⏳ Holiday Buddy is typing... ' }
          ]);
 
          try{
@@ -168,6 +170,10 @@ function ChatBox() {
           content: result?.data?.resp || ' No response received.',
           ui: result?.data?.ui || ''
         };
+        
+         if (updated[updated.length - 1].content === "⚠️ No response received.") {
+    toast.error("⚠️ No response received. Please try again.");
+  }
         setresultAi(result);
         return updated;
       });
@@ -182,8 +188,13 @@ function ChatBox() {
           content: '⚠️ Oops! Something went wrong.',
             ui: ''
         };
+        
         return updated;
       });
+       toast.error("⚠️ Oops! Something went wrong. Please try again. Refresh the page", {
+    position: "top-left",
+    
+  });
          }
 
     //    const result=await axios.post('api/openAi',{
@@ -226,8 +237,10 @@ function ChatBox() {
         if(lastMsg?.ui=="final"){
          setFinal(true);
 
-         setUserInput('thank you');  
-
+         setUserInput('thank you and Please Go check Ur MyTrip Button');  
+         toast.success("🎉 Your holiday plan is ready!, please check out Your Mytrip ",{
+          position:"top-left"
+         })
         //  onSend();
         }
     },[messages]);
@@ -339,20 +352,38 @@ function ChatBox() {
         </section>
 
         <section>
-           <div className='border rounded-2xl p-4 relative h-15  bg-white shadow-sm'>
-                <Textarea placeholder='Create a trip for Parise from New york'
-                onChange={(event)=>{setUserInput(event.target.value)}} value={userInput} 
-                onKeyDown={(e)=>{
-                    if(e.key === 'Enter' && !e.shiftKey) {
-                        e.preventDefault();
-                        onSend();
-                    }
-                }} className='w-full h-20 sm:h-20  bg-transparent border-none focus-visible:ring-0 shadow-none resize-none'/>
-                <Button size={'icon'} className='absolute right-6 bottom-6 -my-4' onClick={()=>onSend()}>
-                    <Send className='h-4 w-4 '/>
-                </Button>
-            </div>
-        </section>
+  <div className="border rounded-2xl p-3 bg-white shadow-sm flex items-end gap-2">
+    <Textarea
+      placeholder="Create a trip for Paris from New York"
+      value={userInput}
+      onChange={(event) => {
+        setUserInput(event.target.value);
+
+        // Auto-resize logic
+        const target = event.target as HTMLTextAreaElement;
+        target.style.height = "auto";
+        target.style.height = `${target.scrollHeight}px`;
+      }}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" && !e.shiftKey) {
+          e.preventDefault();
+          onSend();
+        }
+      }}
+      className="w-full min-h-[3rem] max-h-40 bg-transparent border-none
+                 focus-visible:ring-0 shadow-none resize-none overflow-y-auto"
+    />
+
+    <Button
+      size="icon"
+      className="shrink-0 rounded-full bg-blue-600 text-white hover:bg-blue-700"
+      onClick={onSend}
+    >
+      <Send className="h-4 w-4" />
+    </Button>
+  </div>
+</section>
+
     </div>
   )
 }

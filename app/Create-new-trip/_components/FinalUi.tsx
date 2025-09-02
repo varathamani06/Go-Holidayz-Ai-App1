@@ -2,6 +2,7 @@ import { Button } from '@/components/ui/button'
 import { Globe2 } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
+import { toast } from "sonner";
 
 function FinalUi({viewHoliday,disable}:any) {
   return (
@@ -18,7 +19,8 @@ function FinalUi({viewHoliday,disable}:any) {
         <Button className='mt-2 w-full' disabled={disable} onClick={viewHoliday}>View your Holiday plan</Button>
         </Link>
       </div>
-        <h2 className='text-2xl font-bold mb-4'>And , thank you for choosing us ☺️🤗</h2>
+        <h2 className='text-2xl font-bold mb-4'>And , thank you for choosing us ☺️🤗 and please Click Mytrip Button it shows your trip </h2>
+        
     </div>
   )
 }

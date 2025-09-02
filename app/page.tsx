@@ -3,10 +3,12 @@ import { Button } from "@/components/ui/button"
 import Hero from "./_components/hero";
 import { PopularCtiyList } from "./_components/PopularCtiyList";
 import  GlobalMap  from "./_components/GlobalMap";
+import HeroSlideshow from "./_components/FrameMotion";
 export default function Home() {
   return (
    
     <main className="flex flex-col items-center">
+      <HeroSlideshow/>
       <Hero />
       <PopularCtiyList />
 

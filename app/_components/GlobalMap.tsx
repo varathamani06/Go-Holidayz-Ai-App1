@@ -11,17 +11,21 @@ function GlobalMap() {
   useEffect(() => {
     mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_API_KEY!;
 
+    // 📱 detect if mobile screen
+    const isMobile = window.innerWidth < 768;
+    const initialZoom = isMobile ? 0.8 : 1.2; // smaller zoom for mobile
+
     if (!mapRef.current) {
       mapRef.current = new mapboxgl.Map({
         container: mapContainerRef.current as HTMLElement,
         style: "mapbox://styles/mapbox/streets-v12",
-        center: [0, 20], // start centered
-        zoom: 1.2,
+        center: [0, 20],
+        zoom: initialZoom,
         projection: "globe",
       });
 
       mapRef.current.on("style.load", () => {
-        mapRef.current!.setFog({}); // atmosphere effect
+        mapRef.current!.setFog({});
       });
 
       // 🌍 Spin the globe
@@ -29,13 +33,12 @@ function GlobalMap() {
         if (!mapRef.current) return;
 
         const center = mapRef.current.getCenter();
-        // move longitude slowly (-0.2 is westward, +0.2 is eastward)
-        center.lng -= 0.2;
+        center.lng -= 1; // spin speed
 
         mapRef.current.easeTo({
           center,
-          duration: 100, // speed of transition
-          easing: (n) => n, // linear motion
+          duration: 100,
+          easing: (n) => n,
         });
 
         requestAnimationFrame(spinGlobe);
